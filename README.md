@@ -2,7 +2,7 @@
 Program for my automation
 
 ## Future opportunities
-- JSON edit settings sort
+- JSON edit settings sort(Realize, but bad)
 
 ## Installation
 1. Clone the repository:
