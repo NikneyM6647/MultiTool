@@ -1,10 +1,8 @@
 # MultiTool
-Local project for my automatic sys
+Program for my automation
 
 ## Future opportunities
--
--
--
+- JSON edit settings sort
 
 ## Installation
 1. Clone the repository:
