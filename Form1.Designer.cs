@@ -35,6 +35,7 @@ namespace MultiTool
             button3 = new Button();
             button4 = new Button();
             txtLog1 = new TextBox();
+            button5 = new Button();
             SuspendLayout();
             // 
             // button1
@@ -69,7 +70,7 @@ namespace MultiTool
             // 
             // button4
             // 
-            button4.Location = new Point(12, 87);
+            button4.Location = new Point(12, 162);
             button4.Name = "button4";
             button4.Size = new Size(560, 69);
             button4.TabIndex = 3;
@@ -79,18 +80,29 @@ namespace MultiTool
             // 
             // txtLog1
             // 
-            txtLog1.Location = new Point(12, 162);
+            txtLog1.Location = new Point(12, 237);
             txtLog1.Multiline = true;
             txtLog1.Name = "txtLog1";
             txtLog1.Size = new Size(560, 87);
             txtLog1.TabIndex = 4;
             txtLog1.TextChanged += textBox1_TextChanged;
             // 
+            // button5
+            // 
+            button5.Location = new Point(12, 87);
+            button5.Name = "button5";
+            button5.Size = new Size(245, 69);
+            button5.TabIndex = 5;
+            button5.Text = "Open edit file";
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(584, 261);
+            ClientSize = new Size(584, 337);
+            Controls.Add(button5);
             Controls.Add(txtLog1);
             Controls.Add(button4);
             Controls.Add(button3);
@@ -110,5 +122,6 @@ namespace MultiTool
         private Button button3;
         private Button button4;
         private TextBox txtLog1;
+        private Button button5;
     }
 }

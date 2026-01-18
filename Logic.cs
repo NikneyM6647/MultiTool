@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using System.Text.Json;
 
 namespace MultiTool
 {
@@ -153,8 +154,23 @@ namespace MultiTool
 
         public void SortDownloads()
         {
-            string downloadsPath = @"D:\Downloads";
+            string configPath = "config.json";
 
+            // Если файла нет — создаём по умолчанию
+            if (!File.Exists(configPath))
+            {
+                var defaultConfig = new AppConfig();
+                var json = JsonSerializer.Serialize(defaultConfig, new JsonSerializerOptions { WriteIndented = true });
+                File.WriteAllText(configPath, json);
+            }
+
+            // Читаем настройки из JSON
+            var jsonContent = File.ReadAllText(configPath);
+            var config = JsonSerializer.Deserialize<AppConfig>(jsonContent) ?? new AppConfig();
+
+            string downloadsPath = config.WatchFolder;
+
+            // Проверка папки
             if (!Directory.Exists(downloadsPath))
             {
                 Log("Папка Downloads не найдена!");
@@ -168,17 +184,8 @@ namespace MultiTool
                 return;
             }
 
-            var rules = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-        {
-            { ".png", "png" }, { ".jpg", "png" }, { ".jpeg", "png" },
-            { ".mp4", "vid" }, { ".avi", "vid" }, { ".mkv", "vid" },
-            { ".exe", "exe" },
-            { ".mp3", "mus" }, { ".wav", "mus" },
-            { ".torrent", "torr" },
-            { ".ico", "ico" },
-            { ".pdf", "doc" }, { ".doc", "doc" }, { ".docx", "doc" }, { ".odt", "doc" },
-            { ".zip", "torr" }, { ".rar", "torr" }, { ".jar", "exe" }, {".txt", "doc"}
-        };
+            // Используем правила из JSON
+            var rules = config.Rules;
 
             foreach (string file in files)
             {
@@ -188,6 +195,7 @@ namespace MultiTool
 
                 if (string.IsNullOrEmpty(ext)) continue;
 
+                // Особая логика для .gif
                 if (ext.Equals(".gif", StringComparison.OrdinalIgnoreCase))
                 {
                     try
@@ -206,6 +214,7 @@ namespace MultiTool
                 {
                     targetFolder = rules[ext];
                 }
+
                 if (targetFolder != null)
                 {
                     string destFolder = Path.Combine(downloadsPath, targetFolder);
@@ -345,6 +354,25 @@ namespace MultiTool
                 Log($"Создан тестовый файл: {fileName}");
 
             }
+        }
+        public void OpenJsonfile()
+        {
+            string configPath = "config.json";
+
+            // Если файла ещё нет — создаём его
+            if (!File.Exists(configPath))
+            {
+                var defaultConfig = new AppConfig();
+                var json = JsonSerializer.Serialize(defaultConfig, new JsonSerializerOptions { WriteIndented = true });
+                File.WriteAllText(configPath, json);
+            }
+
+            // Открываем файл в Блокноте (или в системном редакторе по умолчанию)
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = configPath,
+                UseShellExecute = true // ← обязательно!
+            });
         }
     }
 }

@@ -76,5 +76,10 @@ namespace MultiTool
         {
 
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            _logic.OpenJsonfile();
+        }
     }
 }
