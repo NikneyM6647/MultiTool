@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <RootNamespace>MultiTool</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>119ce9ae7e4a58807af2f688d8fc1cb3.ico</ApplicationIcon>
+    <AssemblyName>MultiTool</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="119ce9ae7e4a58807af2f688d8fc1cb3.ico" />
+  </ItemGroup>
+
+</Project>
